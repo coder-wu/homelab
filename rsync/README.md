@@ -1,0 +1,1 @@
+# Story is more interesting than script
