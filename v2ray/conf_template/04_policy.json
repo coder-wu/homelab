@@ -1,0 +1,10 @@
+{
+    "policy": {
+        "system": {
+            "statsInboundDownlink": false,
+            "statsInboundUplink": false,
+            "statsOutboundDownlink": false,
+            "statsOutboundUplink": false
+        }
+    }
+}

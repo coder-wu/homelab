@@ -1,0 +1,65 @@
+{
+    "routing": {
+        "domainStrategy": "IPIfNonMatch",
+        "domainMatcher": "mph",
+        "rules": [
+            {
+                "type": "field",
+                "outboundTag": "DIRECT",
+                "ip": [
+                    ${v2ray_direct_ip},
+                    "223.5.5.5/32",
+                    "119.29.29.29/32",
+                    "180.76.76.76/32",
+                    "114.114.114.114/32",
+                    "geoip:cn",
+                    "geoip:private"
+                ],
+                "domain": [
+                    ${v2ray_direct_domain},
+                    "geosite:cn",
+                    "geosite:private",
+                    "geosite:apple-cn",
+                    "geosite:google-cn",
+                    "geosite:tld-cn",
+                    "geosite:category-games@cn"
+                ]
+            },
+            {
+                "type": "field",
+                "outboundTag": "${v2ray_proxy_type}",
+                "ip": [
+                    ${v2ray_proxy_ip},
+                    "1.1.1.1/32",
+                    "1.0.0.1/32",
+                    "8.8.8.8/32",
+                    "8.8.4.4/32",
+                    "geoip:us",
+                    "geoip:ca",
+                    "geoip:telegram"
+                ],
+                "domain": [
+                    ${v2ray_proxy_domain},
+                    "geosite:geolocation-!cn"
+                ]
+            },
+            {
+                "type": "field",
+                "outboundTag": "REJECT",
+                "domain": [
+                    "geosite:category-ads-all"
+                ]
+            },
+            {
+                "type": "field",
+                "outboundTag": "${v2ray_proxy_type}",
+                "network": "tcp,udp"
+            },
+            {
+                "type": "field",
+                "outboundTag": "DIRECT",
+                "protocol": "bittorrent"
+            }
+        ]
+    }
+}

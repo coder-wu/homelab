@@ -1,0 +1,47 @@
+{
+    "outbounds": [
+        {
+            "tag": "VMESS-PROXY",
+            "protocol": "vmess",
+            "settings": {
+                "vnext": [
+                    ${v2ray_vmess_configs}
+                ]
+            },
+            "streamSettings": {
+                "security": "${v2ray_vmess_security}",
+                "tlsSettings": {
+                    "allowInsecure": true
+                },
+                "xtlsSettings": {
+                    "disableSystemRoot": false
+                }
+            }
+        },
+        {
+            "tag": "SHADOWSOCKS-PROXY",
+            "protocol": "shadowsocks",
+            "settings": {
+                "servers": [
+                    ${v2ray_ss_configs} 
+                ]
+            }
+        },
+        {
+            "tag": "DIRECT",
+            "protocol": "freedom",
+            "settings": {
+                "domainStrategy": "UseIPv4"
+            }
+        },
+        {
+            "tag": "REJECT",
+            "protocol": "blackhole",
+            "settings": {
+                "response": {
+                    "type": "none"
+                }
+            }
+        }
+    ]
+}

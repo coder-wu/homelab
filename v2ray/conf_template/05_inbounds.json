@@ -1,0 +1,39 @@
+{
+    "inbounds": [
+        {
+            "tag": "Http-In",
+            "listen": "${v2ray_local_listen_ip}",
+            "port": "${v2ray_http_in_port}",
+            "protocol": "http",
+            "settings": {
+                "allowTransparent": true,
+                "timeout": 300
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls"
+                ]
+            }
+        },
+        {
+            "tag": "Socks_In",
+            "listen": "${v2ray_local_listen_ip}",
+            "port": "${v2ray_socks_in_port}",
+            "protocol": "socks",
+            "settings": {
+                "auth": "noauth",
+                "ip": "0.0.0.0",
+                "udp": true
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls"
+                ]
+            }
+        }
+    ]
+}
