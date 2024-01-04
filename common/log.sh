@@ -20,6 +20,10 @@ function log_info() {
     log "[INFO] " "$*"
 }
 
+function log_warn() {
+    log "[WARN] " "$*"
+}
+
 function log_error() {
     log "[ERROR] " "$*"
 }

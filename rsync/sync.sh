@@ -1,7 +1,7 @@
 #!/bin/bash -
 
 # shellcheck source=../common/init.sh
-source "${HOMELAB_HOME}/common/init.sh"
+source "$(dirname "$0")/../common/init.sh"
 
 readonly rsync_config="${HOMELAB_HOME}/rsync/config"
 
