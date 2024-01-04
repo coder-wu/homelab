@@ -2,8 +2,8 @@
 
 log_dir="${HOMELAB_LOG_DIR}"
 
-# generate log file for every day, name like yymmdd.log
-log_file="${log_dir}/$(date +"%y%m%d").log"
+# generate log file for every day, name like script_name.yymmdd.log
+log_file="${log_dir}/$(basename "$0").$(date +"%y%m%d").log"
 
 if [ ! -d "${log_dir}" ]; then
     mkdir -p "${log_dir}" ||
@@ -23,6 +23,7 @@ function log_error() {
     log "[ERROR] " "$*"
 }
 
+# runnig a command or function, record log.
 function log_function() {
     eval "$*" 2>&1 | while read -r line; do
         log "${line}"
