@@ -26,7 +26,7 @@ function log_error() {
 
 # runnig a command or function, record log.
 function log_function() {
-    eval "$*" 2>&1 | while read -r line; do
+    while read -r line; do
         log "${line}"
     done
 }

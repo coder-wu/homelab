@@ -7,6 +7,6 @@ readonly rsync_config="${HOMELAB_HOME}/rsync/config"
 
 while read -r from to || [ -n "${from}" ]; do
 	log_info "Sync from ${from} to ${to}"
-	log_function rsync -avzht --progress --delete --exclude=".cache" --bwlimit=60000 \
-	  "${from}" "${to}"
+	rsync -avzht --progress --delete --exclude=".cache" --bwlimit=60000 \
+	  "${from}" "${to}" 2>&1 | log_function
 done < "${rsync_config}"
