@@ -1,9 +1,10 @@
 #!/bin/bash -
 
-log_dir="${HOMELAB_LOG_DIR}"
+readonly log_dir="${HOMELAB_LOG_DIR}"
 
 # generate log file for every day, name like script_name.yymmdd.log
 log_file="${log_dir}/$(basename "$0").$(date +"%y%m%d").log"
+readonly log_file
 
 if [ ! -d "${log_dir}" ]; then
     mkdir -p "${log_dir}" ||
