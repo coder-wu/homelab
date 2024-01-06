@@ -29,7 +29,7 @@ readonly geoip_filepath="${ray_home}/geoip.dat"
 readonly geosite_filepath="${ray_home}/geosite.dat"
 
 # These specified IP/domain will be connected in specified mode. Value should be 
-# like '1.1.1.1,1.1.1.0' or 'example1.com,example2.com', each item is separated 
+# like "1.1.1.1,1.1.1.0" or "example1.com,example2.com", each item is separated 
 # by `,`, with no spaces.
 readonly proxy_ip=""
 readonly proxy_domain=""

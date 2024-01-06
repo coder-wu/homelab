@@ -32,9 +32,9 @@ Operate ray through CLI, and run ray as a background service.
       urd
         - update geo data;
       detect
-        - detect network status
+        - detect network status;
       info
-        - query subscribe information
+        - query subscribe information;
     ```
 
 
