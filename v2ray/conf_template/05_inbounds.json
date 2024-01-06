@@ -2,8 +2,8 @@
     "inbounds": [
         {
             "tag": "Http-In",
-            "listen": "${v2ray_local_listen_ip}",
-            "port": "${v2ray_http_in_port}",
+            "listen": "#local_listen_ip#",
+            "port": "#local_http_port#",
             "protocol": "http",
             "settings": {
                 "allowTransparent": true,
@@ -19,8 +19,8 @@
         },
         {
             "tag": "Socks_In",
-            "listen": "${v2ray_local_listen_ip}",
-            "port": "${v2ray_socks_in_port}",
+            "listen": "#local_listen_ip#",
+            "port": "#local_socks_port#",
             "protocol": "socks",
             "settings": {
                 "auth": "noauth",

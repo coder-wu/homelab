@@ -5,11 +5,11 @@
             "protocol": "vmess",
             "settings": {
                 "vnext": [
-                    ${v2ray_vmess_configs}
+                    #vmess_configs#
                 ]
             },
             "streamSettings": {
-                "security": "${v2ray_vmess_security}",
+                "security": "#vmess_security_mode#",
                 "tlsSettings": {
                     "allowInsecure": true
                 },
@@ -23,7 +23,7 @@
             "protocol": "shadowsocks",
             "settings": {
                 "servers": [
-                    ${v2ray_ss_configs} 
+                    #ss_configs#
                 ]
             }
         },

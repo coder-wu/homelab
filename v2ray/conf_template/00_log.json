@@ -1,8 +1,8 @@
 {
     "log": {
-        // "access": "${HOMELAB_LOG_DIR}/v2ray/access.log",
+        // "access": "#v2ray_log_dir#/access.log",
         "access": "/dev/null",
-        "error": "${HOMELAB_LOG_DIR}/v2ray/error.log",
+        "error": "#v2ray_log_dir#/error.log",
         "loglevel": "warning"
     }
 }

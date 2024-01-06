@@ -8,7 +8,7 @@ readonly log_file
 
 if [ ! -d "${log_dir}" ]; then
   mkdir -p "${log_dir}" ||
-    echo "Can't create log directory: ${log_dir}, please check the permission." ||
+    echo "can't create log directory: ${log_dir}, please check the permission." ||
     exit 1
 fi
 
@@ -17,11 +17,11 @@ function log() {
 }
 
 function log_info() {
-  log "[INFO] " "$*"
+  log " [INFO] " "$*"
 }
 
 function log_warn() {
-  log "[WARN] " "$*"
+  log " [WARN] " "$*"
 }
 
 function log_error() {
@@ -30,7 +30,11 @@ function log_error() {
 
 # runnig a command or function, record log.
 function log_function() {
+  local previous_status="${PIPESTATUS[0]}"
+
   while read -r line; do
     log "${line}"
   done
+  
+  return "${previous_status}"
 }

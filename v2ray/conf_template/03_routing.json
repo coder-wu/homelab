@@ -7,7 +7,7 @@
                 "type": "field",
                 "outboundTag": "DIRECT",
                 "ip": [
-                    ${v2ray_direct_ip},
+                    #direct_ip#
                     "223.5.5.5/32",
                     "119.29.29.29/32",
                     "180.76.76.76/32",
@@ -16,7 +16,7 @@
                     "geoip:private"
                 ],
                 "domain": [
-                    ${v2ray_direct_domain},
+                    #direct_domain#
                     "geosite:cn",
                     "geosite:private",
                     "geosite:apple-cn",
@@ -27,9 +27,9 @@
             },
             {
                 "type": "field",
-                "outboundTag": "${v2ray_proxy_type}",
+                "outboundTag": "#proxy_protocol#",
                 "ip": [
-                    ${v2ray_proxy_ip},
+                    #proxy_ip#
                     "1.1.1.1/32",
                     "1.0.0.1/32",
                     "8.8.8.8/32",
@@ -39,7 +39,7 @@
                     "geoip:telegram"
                 ],
                 "domain": [
-                    ${v2ray_proxy_domain},
+                    #proxy_domain#
                     "geosite:geolocation-!cn"
                 ]
             },
@@ -52,7 +52,7 @@
             },
             {
                 "type": "field",
-                "outboundTag": "${v2ray_proxy_type}",
+                "outboundTag": "#proxy_protocol#",
                 "network": "tcp,udp"
             },
             {
