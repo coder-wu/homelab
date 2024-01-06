@@ -1,8 +1,0 @@
-{
-    "log": {
-        // "access": "#v2ray_log_dir#/access.log",
-        "access": "/dev/null",
-        "error": "#v2ray_log_dir#/error.log",
-        "loglevel": "warning"
-    }
-}

@@ -2,13 +2,12 @@
 # shellcheck disable=SC2034
 
 # ------------------------------------------------------------------------------
-# V2ray software
+# Ray software
 # ------------------------------------------------------------------------------
-# Where v2ray is located. Make sure v2ray_home/xray or v2ray_home/v2ray exists
-# and has correct right.
-readonly v2ray_home=""
-readonly v2ray_exec="${v2ray_home}/v2ray"
-readonly conf_dir="${v2ray_home}/confs"
+# Where ray is located. Make sure ray_home/ray exists and has execute right.
+readonly ray_home=""
+readonly ray_exec="${ray_home}/ray"
+readonly conf_dir="${ray_home}/confs"
 
 # The proxy url is http(s)://local_listen_ip:local_http_port
 # or socks://local_listen_ip:local_socks_port.
@@ -26,8 +25,8 @@ readonly local_socks_port="1081"
 readonly geoip_url="https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geoip.dat"
 readonly geosite_url="https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geosite.dat"
 
-readonly geoip_filepath="${v2ray_home}/geoip.dat"
-readonly geosite_filepath="${v2ray_home}/geosite.dat"
+readonly geoip_filepath="${ray_home}/geoip.dat"
+readonly geosite_filepath="${ray_home}/geosite.dat"
 
 # These specified IP/domain will be connected in specified mode. Value should be 
 # like '1.1.1.1,1.1.1.0' or 'example1.com,example2.com', each item is separated 

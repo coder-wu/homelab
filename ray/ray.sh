@@ -3,28 +3,28 @@
 # shellcheck source=../common/init.sh
 source "$(dirname "$0")/../common/init.sh"
 # shellcheck source=./config.sh
-source "${HOMELAB_HOME}/v2ray/config.sh"
+source "${HOMELAB_HOME}/ray/config.sh"
 
-readonly v2ray_log_dir="${HOMELAB_LOG_DIR}/v2ray"
+readonly ray_log_dir="${HOMELAB_LOG_DIR}/ray"
 
-# Check log directory and v2ray executable file
+# Check log directory and ray executable file
 function check_env() {
-  if [ ! -d "${v2ray_log_dir}" ]; then
-    log_info "create v2ray log directory: ${v2ray_log_dir}"
-    mkdir -p "${v2ray_log_dir}" 2>&1 | log_function || {
-      log_error "create v2ray log directory: ${v2ray_log_dir} failed."
+  if [ ! -d "${ray_log_dir}" ]; then
+    log_info "create ray log directory: ${ray_log_dir}"
+    mkdir -p "${ray_log_dir}" 2>&1 | log_function || {
+      log_error "create ray log directory: ${ray_log_dir} failed."
       exit 1
     }
   fi
 
-  if ! type "${v2ray_exec}" >/dev/null 2>&1; then
-    log_error "v2ray executable file: ${v2ray_exec} does not exist" \
+  if ! type "${ray_exec}" >/dev/null 2>&1; then
+    log_error "ray executable file: ${ray_exec} does not exist" \
       "or has no right to execute."
     exit 1
   fi
 }
 
-# Generate configuration files under ${v2ray_home}/conf.
+# Generate configuration files under ${ray_home}/conf.
 function update_config() {
   local proxy_protocol="$1"
 
@@ -38,23 +38,23 @@ function update_config() {
 
   if [ -d "${conf_dir}" ]; then
     rm -rf "${conf_dir}" 2>&1 | log_function || {
-      log_error "delete v2ray conf directory: ${conf_dir} failed."
+      log_error "delete ray conf directory: ${conf_dir} failed."
       exit 1
     }
   fi
 
   mkdir -p "${conf_dir}" 2>&1 | log_function || {
-    log_error "create v2ray conf directory: ${conf_dir} failed."
+    log_error "create ray conf directory: ${conf_dir} failed."
     exit 1
   }
 
-  readonly v2ray_conf_template_dir="${HOMELAB_HOME}/v2ray/conf_template"
-  for template_file in "${v2ray_conf_template_dir}"/*.json; do
+  readonly ray_conf_template_dir="${HOMELAB_HOME}/ray/conf_template"
+  for template_file in "${ray_conf_template_dir}"/*.json; do
     local template_content
     template_content=$(<"${template_file}")
     # Replace placeholders with variable values
     # 00_log.json
-    template_content="${template_content//#v2ray_log_dir#/${v2ray_log_dir}}"
+    template_content="${template_content//#ray_log_dir#/${ray_log_dir}}"
 
     # 03_routing.json
     local format_result
@@ -122,15 +122,15 @@ function update_config() {
   done
 }
 
-function start_v2ray() {
-  "${v2ray_exec}" -confdir "${conf_dir}" 2>&1 | log_function &
+function start_ray() {
+  "${ray_exec}" -confdir "${conf_dir}" 2>&1 | log_function &
 }
 
-function stop_v2ray() {
-  local v2ray_service_name
-  v2ray_service_name=$(basename "${v2ray_exec}")
-  for thread_num in $(pgrep "${v2ray_service_name}"); do
-    log_info "stop v2ray process ${thread_num}."
+function stop_ray() {
+  local ray_service_name
+  ray_service_name=$(basename "${ray_exec}")
+  for thread_num in $(pgrep "${ray_service_name}"); do
+    log_info "stop ray process ${thread_num}."
     kill -9 "${thread_num}" | log_function
   done
 }
@@ -208,13 +208,13 @@ main() {
 
   case "${option}" in
   load)
-    stop_v2ray
+    stop_ray
     update_config "${protocol}"
-    start_v2ray
+    start_ray
     ;;
 
   stop)
-    stop_v2ray
+    stop_ray
     ;;
 
   urd)
