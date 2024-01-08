@@ -1,0 +1,98 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: aria2
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: downloads-pv
+  namespace: aria2
+  labels:
+    app: aria2
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 300Gi
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: "/syncthing/share/download"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: "downloads-pv-claim"
+  namespace: aria2
+spec:
+  storageClassName: "manual"
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 300Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aria2
+  namespace: aria2
+spec:
+  selector:
+    matchLabels:
+      app: aria2
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: aria2
+    spec:
+      nodeName: nuclear
+      containers:
+        - name: aria2
+          image: wahyd4/aria2-ui:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
+              name: aria2-port
+              protocol: TCP
+          env:
+           ## Update this to the final port you would use in the browser
+            - name: ARIA2_EXTERNAL_PORT
+              value: "443"
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
+          volumeMounts:
+            - name: downloads
+              mountPath: /data
+          resources:
+            requests:
+              cpu: 150m
+              memory: 256Mi
+            limits:
+              cpu: 400m
+              memory: 1024Mi
+      volumes:
+        - name: downloads
+          persistentVolumeClaim:
+            claimName: downloads-pv-claim
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: aria2-service
+  namespace: aria2
+  labels:
+    app: aria2
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: aria2-port
+      protocol: TCP
+      name: aria2-web
+  selector:
+    app: aria2
+
