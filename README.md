@@ -2,7 +2,7 @@
 
 ## rsync
 
-To perform synchronization between directories using rsync. This script is boring, and it shouldn't even exist, but [there is an interesting story behind it](./rsync/README.md).
+To perform synchronization between directories using rsync. This script is boring, and it shouldn't even exist, but [there is an interesting story behind it](https://blog.coderwu.com/docs/backup.html).
 
 ### usage
 
@@ -49,3 +49,7 @@ Operate ray through CLI, and run ray as a background service.
     ```
     * * * * * ${HOMELAB_HOME}/ray/ray.sh detect
     ```
+
+## K8S
+
+I use Minikube as development environment.
