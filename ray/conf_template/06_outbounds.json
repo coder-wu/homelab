@@ -31,7 +31,7 @@
             "tag": "DIRECT",
             "protocol": "freedom",
             "settings": {
-                "domainStrategy": "UseIPv4"
+                "domainStrategy": "AsIs"
             }
         },
         {

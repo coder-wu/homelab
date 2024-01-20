@@ -14,7 +14,11 @@
                     "114.114.114.114/32",
                     "geoip:cn",
                     "geoip:private"
-                ],
+                ]
+            },
+            {
+                "type": "field",
+                "outboundTag": "DIRECT",
                 "domain": [
                     #direct_domain#
                     "geosite:cn",
@@ -37,7 +41,11 @@
                     "geoip:us",
                     "geoip:ca",
                     "geoip:telegram"
-                ],
+                ]
+            },
+            {
+                "type": "field",
+                "outboundTag": "#proxy_protocol#",
                 "domain": [
                     #proxy_domain#
                     "geosite:geolocation-!cn"
