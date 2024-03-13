@@ -20,7 +20,7 @@ spec:
           command: ["/bin/sleep", "3650d"]
           env:
             - name: GEMINI_API_KEY
-              value: "AIzaSyBdRQQQ8ViZhTTax1irODIwhc_I4RLdCEA"
+              value: ""
             - name: http_proxy
               value: "https://192.168.64.1:1087"
             - name: https_proxy
