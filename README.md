@@ -21,21 +21,7 @@ Operate ray through CLI, and run ray as a background service.
 
 1. Read comments in ```${HOMELAB_HOME}/ray/config.sh``` and set the relevant values.
 
-2. Run script with argument:
-    ```
-      load
-        - reload configurations and restart ray;
-          ss
-            - start with this protocol;
-      stop
-        - stop ray, kill process;
-      urd
-        - update geo data;
-      detect
-        - detect network status;
-      info
-        - query subscribe information;
-    ```
+2. Run ```./ray.sh -h```.
 
 
 

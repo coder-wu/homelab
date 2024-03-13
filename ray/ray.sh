@@ -1,4 +1,14 @@
 #!/bin/bash
+###
+### Usage:
+###   ./ray.sh <option>
+###
+### Options:
+###   load <ss>  Reload configurations and restart ray (with ss protocol)
+###   stop       Stop ray, kill process
+###   urd        Update geo data
+###   detect     Detect network status
+###   info       Query subscribe information
 
 # shellcheck source=../common/init.sh
 source "$(dirname "$0")/../common/init.sh"
@@ -200,16 +210,22 @@ function to_json_string_array() {
   echo "${format_result}"
 }
 
+function help() {
+  awk -F'### ' '/^###/ { print $2 }' "$0"
+}
+
 main() {
-  local option="$1"
-  local protocol="$2"
+  if [[ $# == 0 ]] || [[ "$1" == "-h" ]]; then
+    help
+    exit 1
+  fi
 
   check_env
 
-  case "${option}" in
+  case "$1" in
   load)
     stop_ray
-    update_config "${protocol}"
+    update_config "$2"
     start_ray
     ;;
 
@@ -230,7 +246,7 @@ main() {
     ;;
 
   *)
-    log_error "Unknown option: ${option}."
+    log_error "Unknown option: $1."
     ;;
   esac
 }
