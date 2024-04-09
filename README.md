@@ -1,16 +1,16 @@
 # Homelab
 
-## rsync
+## sync
 
-To perform synchronization between directories using rsync. This script is boring, and it shouldn't even exist, but [there is an interesting story behind it](https://blog.coderwu.com/docs/backup.html).
+To perform synchronization between directories using [rclone](https://rclone.org/). This script is boring, and it shouldn't even exist, but [there is an interesting story behind it](https://blog.coderwu.com/en/en/just-for-fun/).
 
 ### usage
 
-1. Configure paths to be synchronized in ```${HOMELAB_HOME}/rsync/config```, one path per line.
+1. Configure paths to be synchronized in ```${HOMELAB_HOME}/sync/config```, one path per line.
 
 2. Run script to synchronize:
     ```
-    sh ${HOMELAB_HOME}/rsync/sync.sh
+    sh ${HOMELAB_HOME}/sync/sync.sh
     ```
 
 ## ray 
