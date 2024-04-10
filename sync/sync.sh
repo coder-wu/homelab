@@ -16,6 +16,8 @@ for i in "${!from_paths[@]}"; do
   from="${from_paths[$i]}"
   to="${to_paths[$i]}"
   log_info "sync from ${from} to ${to}"
-  rclone sync --interactive --copy-links \
+  rclone sync --interactive \
+    --copy-links \
+    --timeout=0 \
     "${from}" "${to}" 2>&1 | log_function
 done

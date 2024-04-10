@@ -1,0 +1,74 @@
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: alist-pv-volume
+  namespace: infra
+  labels:
+    app: alist
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: /data/infra/alist
+    type: Directory
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: alist-pv-claim
+  namespace: infra
+  labels:
+    app: alist
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 8Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: alist
+  namespace: infra
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: alist
+  template:
+    metadata:
+      labels:
+        app: alist
+    spec:
+      volumes:
+      containers:
+        - name: alist
+          image: xhofe/alist:latest
+          imagePullPolicy: "IfNotPresent"
+          ports:
+            - containerPort: 5244
+          volumeMounts:
+            - mountPath: /opt/alist/data
+              name: alist-volumes
+      volumes:
+        - name: alist-volumes
+          persistentVolumeClaim:
+            claimName: alist-pv-claim
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: alist-service
+  namespace: infra
+spec:
+  type: NodePort
+  ports:
+   - port: 5244
+     nodePort: 30244
+  selector:
+   app: alist
