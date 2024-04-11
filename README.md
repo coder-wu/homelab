@@ -4,6 +4,8 @@
 
 To perform synchronization between directories using [rclone](https://rclone.org/). This script is boring, and it shouldn't even exist, but [there is an interesting story behind it](https://blog.coderwu.com/en/en/just-for-fun/).
 
+New synchronization solution is described in [Back up with rclone and alist](https://blog.coderwu.com/en/en/backup/).
+
 ### usage
 
 1. Configure paths to be synchronized in ```${HOMELAB_HOME}/sync/config```, one path per line.
