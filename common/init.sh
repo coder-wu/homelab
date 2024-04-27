@@ -1,6 +1,6 @@
 #!/bin/bash -
 
-HOMELAB_HOME="$(cd "$(dirname "$0")"/../ && pwd)"
+HOMELAB_HOME="$(cd "$(dirname "${BASH_SOURCE[0]}")"/../ && pwd)"
 
 # log is saved under this directory.
 HOMELAB_LOG_DIR="/tmp/homelab/log"
