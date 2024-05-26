@@ -4,6 +4,7 @@
 source "$(dirname "$0")/../common/init.sh"
 
 readonly sync_config="${HOMELAB_HOME}/sync/config"
+readonly exclude_file="${HOMELAB_HOME}/sync/exclude.txt"
 
 from_paths=()
 to_paths=()
@@ -19,5 +20,6 @@ for i in "${!from_paths[@]}"; do
   rclone sync -P \
     --copy-links \
     --timeout=0 \
+    --exclude-from "${exclude_file}" \
     "${from}" "${to}" 2>&1 | log_function
 done
