@@ -38,6 +38,14 @@ Operate ray through CLI, and run ray as a background service.
     * * * * * ${HOMELAB_HOME}/ray/ray.sh detect
     ```
 
-## K8S
+## container
 
-I use Minikube as development environment.
+Container environment.
+
+### k8s
+
+```yaml files``` are used to create container with k8s.
+
+### docker
+
+```Makefiles``` are used to create container directly with docker.
