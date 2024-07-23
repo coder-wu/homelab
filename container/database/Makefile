@@ -7,11 +7,13 @@ info:
 start-env:
 	make start-mariadb
 	make start-pg
+	make start-redis
 
 .PHONY: stop-env
 stop-env:
 	make stop-mariadb
 	make stop-pg
+	make stop-redis
 
 MARIADB_CONTAINER = "mariadb"
 .PHONY: create-mariadb
@@ -53,22 +55,22 @@ start-pg:
 stop-pg:
 	docker stop $(PG_CONTAINER)
 
-ALIST_CONTAINER = "alist"
-.PHONY: create-alist
-create-alist:
-	docker run --name $(ALIST_CONTAINER) \
-		-v $(DATA_DIR)/infra/alist:/opt/alist/data \
-		-p 5244:5244 \
-		-d xhofe/alist:latest
+REDIS_CONTAINER = "redis"
+.PHONY: create-redis
+create-redis:
+	docker run --name $(REDIS_CONTAINER) \
+		-v $(DATA_DIR)/db/redis/data:/data \
+		-p 6379:6379 \
+		-d redis:latest
 
-.PHONY: delete-alist
-delete-alist:
-	docker rm $(ALIST_CONTAINER)
+.PHONY: delete-redis
+delete-redis:
+	docker rm $(REDIS_CONTAINER)
 
-.PHONY: start-alist
-start-alist:
-	docker start $(ALIST_CONTAINER)
+.PHONY: start-redis
+start-redis:
+	docker start $(REDIS_CONTAINER)
 
-.PHONY: stop-alist
-stop-alist:
-	docker stop $(ALIST_CONTAINER)
+.PHONY: stop-redis
+stop-redis:
+	docker stop $(REDIS_CONTAINER)
