@@ -4,7 +4,9 @@
 ###   ./ray.sh <option>
 ###
 ### Options:
-###   load <ss>  Reload configurations and restart ray (with ss protocol)
+###   load       Reload configurations and restart ray
+###     ss       proxy by ss protocol
+###     direct   no proxy
 ###   stop       Stop ray, kill process
 ###   urd        Update geo data
 ###   detect     Detect network status
@@ -41,6 +43,9 @@ function update_config() {
   if [ "${proxy_protocol}" == "ss" ]; then
     proxy_protocol="SHADOWSOCKS-PROXY"
     log_info "use shadowsocks protocol"
+  elif [ "${proxy_protocol}" == "direct" ]; then
+    proxy_protocol="DIRECT"
+    log_info "direct connect"
   else
     proxy_protocol="VMESS-PROXY"
     log_info "use vmess protocol"
@@ -78,7 +83,7 @@ function update_config() {
     template_content="${template_content//#direct_domain#/${format_result}}"
 
     template_content="${template_content//#proxy_protocol#/${proxy_protocol}}"
-
+    
     # 05_inbounds.json
     template_content="${template_content//#local_listen_ip#/${local_listen_ip}}"
     template_content="${template_content//#local_http_port#/${local_http_port}}"
@@ -128,6 +133,7 @@ function update_config() {
 
     local conf_filename
     conf_filename=$(basename "${template_file}")
+
     echo "${template_content}" >"${conf_dir}/${conf_filename}"
   done
 }
