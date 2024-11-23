@@ -5,6 +5,7 @@
         "geoip",
         "geolocation",
         "geosite",
+        "METABASE",
         "pgrep",
         "pkill",
         "rclone",
