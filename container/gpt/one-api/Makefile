@@ -4,23 +4,22 @@ info:
 	docker -v
 
 ONE_API_CONTAINER = "one-api"
-.PHONY: create-one-api
-create-one-api:
+.PHONY: create
+create:
 	docker run --name $(ONE_API_CONTAINER) \
-		--restart always \
 		-e TZ=Asia/Shanghai \
 		-v $(LOG_DIR):/data \
 		-p 3000:3000 \
 		-d justsong/one-api
 
-.PHONY: delete-one-api
-delete-one-api:
+.PHONY: delete
+delete: stop
 	docker rm $(ONE_API_CONTAINER)
 
-.PHONY: start-one-api
-start-one-api:
+.PHONY: start
+start:
 	docker start $(ONE_API_CONTAINER)
 
-.PHONY: stop-one-api
-stop-one-api:
+.PHONY: stop
+stop:
 	docker stop $(ONE_API_CONTAINER)

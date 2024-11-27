@@ -14,7 +14,7 @@ create:
 		-d postgres:15.7
 
 .PHONY: delete
-delete:
+delete: stop
 	docker rm $(PG_CONTAINER)
 
 .PHONY: start
@@ -22,5 +22,5 @@ start:
 	docker start $(PG_CONTAINER)
 
 .PHONY: stop
-stop-pg:
+stop:
 	docker stop $(PG_CONTAINER)
