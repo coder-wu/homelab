@@ -20,6 +20,7 @@ for i in "${!from_paths[@]}"; do
   rclone sync -P \
     --copy-links \
     --timeout=0 \
+    --exclude-if-present .rcloneignore \
     --exclude-from "${exclude_file}" \
     "${from}" "${to}" 2>&1 | log_function
 done
